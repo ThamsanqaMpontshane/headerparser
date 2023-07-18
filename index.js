@@ -18,6 +18,7 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
+  console.log(req.ip);
 });
 
 // your first API endpoint...
