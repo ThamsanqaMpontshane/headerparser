@@ -2,7 +2,7 @@
 // where your node app starts
 
 // init project
-require('dotenv').config();
+// require('dotenv').config();
 var express = require('express');
 var theNode = require('nodemon')
 var app = express();
@@ -26,7 +26,11 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 app.get('/api/whoami', function (req, res) {
-  res.json({"ipaddress":"197.229.0.168","language":"en-ZA,en-GB;q=0.9,en-US;q=0.8,en;q=0.7","software":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"});
+  // ip adress must not be ::1
+  let theIP = req.ip;
+  let theLang = req.headers['accept-language'];
+  let theSoft = req.headers['user-agent'];
+  res.send({"ipaddress": theIP, "language": theLang, "software": theSoft});
 });
 
 // listen for requests :)
